@@ -1,0 +1,20 @@
+# PROGRAM FOR CASE
+
+REPORT Z_CASE.
+parameter : class type i .
+case  class .
+  when 0.
+    write : 'sunday'.
+  when 1.
+    write : 'monday'.
+     when 2.
+    write : 'tuseday'.
+  when 3.
+    write : 'wednesday'.
+     when 4.
+    write : 'thursday'.
+  when 5.
+    write : 'friday'.
+     when 6.
+    write : 'saturday'.
+    endcase.

@@ -1,0 +1,379 @@
+*&---------------------------------------------------------------------*
+*& Report ZVEDASHRI1
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZVEDASHRI1 LINE-COUNT 20.
+
+SELECTION-SCREEN BEGIN OF BLOCK BLK1 WITH FRAME TITLE text-001.
+
+PARAMETERS: B1 RADIOBUTTON GROUP R1 USER-COMMAND TEST DEFAULT 'X',
+            B2 RADIOBUTTON GROUP R1,
+            B3 RADIOBUTTON GROUP R1,
+            B4 RADIOBUTTON GROUP R1,
+            B5 RADIOBUTTON GROUP R1.
+
+SELECTION-SCREEN END OF BLOCK BLK1.
+
+SELECTION-SCREEN BEGIN OF BLOCK BLK2 WITH FRAME TITLE TEXT-002.
+
+  PARAMETERS: PA_SHR TYPE ZSHRI_DATA-STUDENTS_APP_ID MODIF ID M1,
+              PA_HER TYPE ZHERO_HONDAID-EMPLOYEE_ID MODIF ID M2,
+              PA_MAR TYPE MARA-MATNR MODIF ID M3,
+              PA_KNA TYPE KNA1-KUNNR MODIF ID M4,
+              PA_ANL TYPE ANLA-BUKRS MODIF ID M5.
+
+  SELECTION-SCREEN END OF BLOCK BLK2.
+
+DATA: W1 TYPE ZSHRI_DATA,
+      W2 TYPE ZHERO_HONDAID,
+      W3 TYPE MARA,
+      W4 TYPE KNA1,
+      W5 TYPE ANLA,
+      ITAB1 LIKE TABLE OF ZSHRI_DATA,
+      ITAB2 LIKE TABLE OF ZHERO_HONDAID,
+      ITAB3 LIKE TABLE OF MARA,
+      ITAB4 LIKE TABLE OF KNA1,
+      ITAB5 LIKE TABLE OF ANLA.
+
+TOP-OF-PAGE.
+WRITE: SY-PAGNO.
+
+IF B1 = 'X'.
+  WRITE: 'STUDENT REPORT',
+          SY-DBCNT.
+          ULINE.
+
+ELSEIF B2 = 'X'.
+  WRITE: 'EMPLOYEE REPORT',
+          SY-DBCNT.
+          ULINE.
+
+ELSEIF B3 = 'X'.
+  WRITE: 'MATERIAL REPORT',
+          SY-DBCNT.
+          ULINE.
+
+ELSEIF B4 = 'X'.
+  WRITE: 'CUSTOMER REPORT',
+          SY-DBCNT.
+          ULINE.
+
+ELSE.
+  WRITE: 'ASSETS REPORT',
+          SY-DBCNT.
+          ULINE.
+
+ENDIF.
+
+END-OF-PAGE.
+ULINE.
+
+AT SELECTION-SCREEN.
+
+IF B1 = 'X'.
+
+    IF PA_SHR IS INITIAL.
+      MESSAGE: 'Enter some value' TYPE 'I'.
+
+    ELSE.
+    SELECT * FROM ZSHRI_DATA INTO CORRESPONDING FIELDS OF TABLE ITAB1
+    WHERE STUDENTS_APP_ID = PA_SHR.
+
+    IF SY-SUBRC <> 0.
+      MESSAGE 'PLEASE GIVE ANY OTHER INPUT.' TYPE 'E'.
+    ENDIF.
+    ENDIF.
+
+ELSEIF B2 = 'X'.
+
+    IF PA_HER IS INITIAL.
+      MESSAGE: 'Enter some value' TYPE 'I'.
+
+    ELSE.
+    SELECT * FROM ZHERO_HONDAID INTO CORRESPONDING FIELDS OF TABLE ITAB2
+    WHERE EMPLOYEE_ID = PA_HER.
+
+    IF SY-SUBRC <> 0.
+      MESSAGE 'PLEASE GIVE ANY OTHER INPUT.' TYPE 'E'.
+    ENDIF.
+    ENDIF.
+
+ELSEIF B3 = 'X'.
+
+    IF PA_MAR IS INITIAL.
+      MESSAGE: 'Enter some value' TYPE 'I'.
+
+    ELSE.
+    SELECT * FROM MARA INTO CORRESPONDING FIELDS OF TABLE ITAB3
+    WHERE MATNR = PA_MAR.
+
+    IF SY-SUBRC <> 0.
+      MESSAGE 'PLEASE GIVE ANY OTHER INPUT.' TYPE 'E'.
+    ENDIF.
+    ENDIF.
+
+ELSEIF B4 = 'X'.
+
+    IF PA_KNA IS INITIAL.
+      MESSAGE: 'Enter some value' TYPE 'I'.
+
+    ELSE.
+    SELECT * FROM KNA1 INTO CORRESPONDING FIELDS OF TABLE ITAB4
+    WHERE KUNNR = PA_KNA.
+
+    IF SY-SUBRC <> 0.
+      MESSAGE 'PLEASE GIVE ANY OTHER INPUT.' TYPE 'E'.
+    ENDIF.
+    ENDIF.
+
+ELSEIF B5 = 'X'.
+
+    IF PA_ANL IS INITIAL.
+      MESSAGE: 'Enter some value' TYPE 'I'.
+
+    ELSE.
+    SELECT * FROM ANLA INTO CORRESPONDING FIELDS OF TABLE ITAB5
+    WHERE BUKRS = PA_ANL.
+
+    IF SY-SUBRC <> 0.
+      MESSAGE 'PLEASE GIVE ANY OTHER INPUT.' TYPE 'E'.
+    ENDIF.
+    ENDIF.
+
+ENDIF.
+
+AT SELECTION-SCREEN OUTPUT.
+
+IF B1 = 'X'.
+
+  LOOP AT SCREEN.
+
+    IF screen-group1 = 'M1'.
+        screen-active = '1'.
+        MODIFY SCREEN.
+    ENDIF.
+
+   IF screen-group1 = 'M2'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+     ENDIF .
+
+    IF screen-group1 = 'M3'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M4'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M5'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+   ENDLOOP.
+
+ELSEIF B2 = 'X'.
+
+  LOOP AT SCREEN.
+
+   IF screen-group1 = 'M1'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+     ENDIF .
+
+    IF screen-group1 = 'M2'.
+        screen-active = '1'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M3'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M4'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M5'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+   ENDLOOP.
+
+ELSEIF B3 = 'X'.
+
+  LOOP AT SCREEN.
+
+   IF screen-group1 = 'M1'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+     ENDIF .
+
+    IF screen-group1 = 'M2'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M3'.
+        screen-active = '1'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M4'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M5'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+   ENDLOOP.
+
+ELSEIF B4 = 'X'.
+
+  LOOP AT SCREEN.
+
+   IF screen-group1 = 'M1'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+     ENDIF .
+
+    IF screen-group1 = 'M2'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M3'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M4'.
+        screen-active = '1'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M5'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+   ENDLOOP.
+
+ELSEIF B5 = 'X'.
+
+  LOOP AT SCREEN.
+
+   IF screen-group1 = 'M1'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+     ENDIF .
+
+    IF screen-group1 = 'M2'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M3'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    ENDIF.
+
+    IF screen-group1 = 'M4'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+    IF screen-group1 = 'M5'.
+        screen-active = '1'.
+        MODIFY SCREEN.
+    ENDIF.
+    ENDIF.
+
+   ENDLOOP.
+
+ENDIF.
+
+START-OF-SELECTION.
+
+IF B1 = 'X'.
+
+  SELECT SINGLE STUDENTS_APP_ID STUDENT_NAME STUDENT_DOB STD_DEPRT STUDENT_MOBNO STUDENT_EID STUDENT_AGE FROM ZSHRI_DATA
+    INTO CORRESPONDING FIELDS OF W1
+    WHERE STUDENTS_APP_ID = PA_SHR.
+    "LOOP AT ITAB1 INTO W1.
+
+      WRITE: / W1-STUDENTS_APP_ID,
+               W1-STUDENT_NAME,
+               W1-STUDENT_DOB,
+               W1-STD_DEPRT,
+               W1-STUDENT_MOBNO,
+               W1-STUDENT_EID,
+               W1-STUDENT_AGE.
+    "ENDLOOP.
+
+ELSEIF B2 = 'X'.
+  SELECT SINGLE EMPLOYEE_ID EMPLOYEE_NAME DATEOF_JOINING EMPLOYEE_ROLE EMPLOYEE_PHNO EMPLOYEE_SALARY COMPANY_NAME FROM ZHERO_HONDAID
+    INTO CORRESPONDING FIELDS OF W2
+    WHERE EMPLOYEE_ID = PA_HER.
+
+    "LOOP AT ITAB2 INTO W2.
+      WRITE: / W2-EMPLOYEE_ID,
+               W2-EMPLOYEE_NAME,
+               W2-DATEOF_JOINING,
+               W2-EMPLOYEE_ROLE,
+               W2-EMPLOYEE_PHNO,
+               W2-EMPLOYEE_SALARY,
+               W2-COMPANY_NAME.
+    "ENDLOOP.
+
+ELSEIF B3 = 'X'.
+  SELECT SINGLE MATNR ERSDA ERNAM LAEDA AENAM PSTAT MTART FROM MARA
+    INTO CORRESPONDING FIELDS OF W3
+    WHERE MATNR = PA_MAR.
+    "LOOP AT ITAB3 INTO W3.
+      WRITE: / W3-MATNR,
+               W3-ERSDA,
+               W3-ERNAM,
+               W3-LAEDA,
+               W3-AENAM,
+               W3-PSTAT,
+               W3-MTART.
+    "ENDLOOP.
+
+ELSEIF B4 = 'X'.
+  SELECT SINGLE MANDT KUNNR LAND1 NAME1 NAME2 ORT01 PSTLZ FROM KNA1
+    INTO CORRESPONDING FIELDS OF W4
+    WHERE KUNNR = PA_KNA.
+    "LOOP AT ITAB4 INTO W4.
+      WRITE: / W4-MANDT,
+               W4-KUNNR,
+               W4-LAND1,
+               W4-NAME1,
+               W4-NAME2,
+               W4-ORT01,
+               W4-PSTLZ.
+    "ENDLOOP.
+
+ELSE.
+  SELECT SINGLE MANDT BUKRS ANLN1 ANLN2 ANLKL GEGST ANLAR FROM ANLA
+    INTO CORRESPONDING FIELDS OF W5
+    WHERE BUKRS = PA_ANL.
+    "LOOP AT ITAB5 INTO W5.
+      WRITE: / W5-MANDT,
+               W5-BUKRS,
+               W5-ANLN1,
+               W5-ANLN2,
+               W5-ANLKL,
+               W5-GEGST,
+               W5-ANLAR.
+    "ENDLOOP.
+
+ENDIF.

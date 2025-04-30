@@ -1,0 +1,41 @@
+*&---------------------------------------------------------------------*
+*& Report Z_SM3
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT Z_SM3.
+
+DATA: WA TYPE MARA.
+PARAMETERS: PA_MATNR TYPE C LENGTH 40.
+
+START-OF-SELECTION.
+
+SELECT SINGLE MATNR
+              ERSDA
+              ERNAM
+              DATAB
+              LIQDT
+
+  FROM MARA INTO CORRESPONDING FIELDS OF WA
+
+  WHERE MATNR = PA_MATNR.
+
+  WRITE: / WA-MATNR,
+          WA-ERSDA,
+          WA-ERNAM,
+          WA-DATAB,
+          WA-LIQDT.
+
+  IF SY-SUBRC = 0.
+
+    MESSAGE: 'PROGRAM IS SUCCESSFULLY FETCHED' TYPE'S'.
+
+  WRITE: / WA-MATNR,
+          WA-ERSDA,
+          WA-ERNAM,
+          WA-DATAB,
+          WA-LIQDT.
+
+ ELSE.
+   MESSAGE: 'NO RECORDS FOUND' TYPE 'E'.
+ ENDIF.

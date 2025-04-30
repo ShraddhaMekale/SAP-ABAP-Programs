@@ -1,0 +1,18 @@
+# PROGRAM FOR SELECT SINGLE RECORD FROM MARA TABLE
+
+
+REPORT ZSQL_SINGLE.
+
+DATA : WA TYPE MARA.
+
+SELECT SINGLE MATNR
+              ERSDA
+              ERNAM
+              DATAB
+              LIQDT
+              EXTWG
+              SATNR
+  FROM MARA INTO CORRESPONDING FIELDS OF WA.
+
+  WRITE : WA-MATNR,
+          WA-SATNR.

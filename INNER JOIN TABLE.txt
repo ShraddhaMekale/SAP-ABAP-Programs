@@ -1,0 +1,32 @@
+*&---------------------------------------------------------------------*
+*& Report ZJOINSS
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZJOINSS.
+
+TYPES: BEGIN OF TY_FINAL,
+  MTART TYPE MARA-MTART,
+  MATNR TYPE MARA-MATNR,
+  MTREF TYPE T134-MTREF,
+  PSTAT TYPE T134-PSTAT,
+
+  END OF TY_FINAL.
+
+  DATA: WA TYPE TY_FINAL,
+        ITAB LIKE TABLE OF WA.
+
+  START-OF-SELECTION.
+
+  SELECT A~MTART B~MTREF
+    FROM MARA AS A INNER JOIN T134 AS B
+    ON A~MTART = B~MTART
+    INTO CORRESPONDING FIELDS OF TABLE ITAB
+    ORDER BY A~MTART ASCENDING.
+    DELETE ADJACENT DUPLICATES FROM ITAB COMPARING MTART.
+
+   WRITE: SY-DBCNT.
+
+   LOOP AT ITAB INTO WA.
+     WRITE: /  WA-MTART, WA-MTREF.
+     ENDLOOP.

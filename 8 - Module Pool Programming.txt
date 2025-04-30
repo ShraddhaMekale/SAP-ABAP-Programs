@@ -1,0 +1,142 @@
+                                                            Module Pool Programming
+
+It is also called as dialog Programming. It is a pool of modules( Screens, Includes, Transactions etc). 
+A Module Pool is mainly a pool of screens.
+
+1) Tabs of a Screen :
+
+Attributes -> It gives the generic information of that screen.
+Element List -> It provids the list of elements available on that screen.
+Flow Logic -> It's purpose is to write the logic.
+
+2) Module Pool Events :
+
+a) PBO( Process Before output) - This event called before displaying a particular screen.
+b) PAI( Process after Input) - This event called after performing some action on a particular screen.
+c) POV( Process on Value Request) - This event called when we click F4 on a field of a screen.
+d) POH( Process on Help Request) - This event called when we click F1( Technical information) on a field of a  screen.
+
+F4 Help -> It tells us what are the various possible values for any Input field.
+F1 Help -> It gives us the technical information of any field/column.
+
+
+3) Parts of GUI Status :
+
+PF-STATUS ->( Personal Functions)
+
+Menu Bar
+Function Keys
+Title Bar
+Application Toolbar
+
+
+Imp Point : A transaction code is required to run a module pool program.
+
+SE93-> Transaction code to create transaction codes.
+SE51-> Transaction code for Screen Painter.
+SY-UCOMM-> System variable for User command, which captures the value of Function Code.
+
+4) Table control : 
+
+Is used to display data in the form of a table( column and rows)
+
+
+5) SUB Screen : 
+
+a) Create a sub screen area in the normal screen.
+b) Call the subscreen in to sub screen area of main screen.
+
+Syntax : CALL SUBSCREEN SUB INCLUDING SY-REPID '0101'.
+
+Where SUB = Sub screen area name.
+SY-REPID - System variable for Report Id.
+0101 - Sub screen number.
+
+6) Modal Dialog Box:
+
+   CALL SCREEN STARTING AT 10 20 "TOP LEFT Coordinate
+                ENDING AT 50 60. "BOTTOM RIGHT Coordinate
+
+7) Tab Strip :
+
+   For every tab SAP generates a Sub screen.
+
+
+8) AT EXIT-COMMAND -> 
+
+a) The MODULE ... AT EXIT-COMMAND statement is normally used to leave the current screen without the automatic input checks taking place.
+b) Take the Function Type of the Button = 'E'( Exit).
+
+
+9) CHAIN, ENDCHAIN ->
+
+The Purpose of CHAIN , ENDCHAIN is to validate the field input.
+
+Syntax :  CHAIN.
+          FIELD : ( Field1 , Field2 ----) Module ( Module name).
+          ENDCHAIN.
+
+
+Usually in Input screen, whenever the user gives an input and their is no record present, User input is restricted by an error message. 
+This error message disables the input screen & now the user cannot provide correct values in the input field as it is disabled by the message. 
+To over rule this issue, Chain And EndChain Statement comes into the Flow Logic of the screen where the input fields are validated and remain enabled after the 
+error message. 
+
+
+
+10) Changing the screen fields properties:
+
+In the below example, we set the Input property to zero. 
+
+LOOP at SCREEN.
+IF ( condition).
+SCREEN-INPUT = 0.
+MODIFY SCREEN.
+ENDIF.
+ENDLOOP.
+
+We can change the other properties like - Invisible, Required,output etc for the fields by using the above logic.
+
+CALL SCREEN screen number -> Will add the screen to the stack.
+LEAVE TO SCREEN screen number-> Replace last stacked screen via the new screen.
+LEAVE TO SCREEN 0 -> Go to the previous stacked screen.
+
+
+Important Links :
+
+Link for Chain, End chain : 
+https://www.abaponhana.com/chain-endchain/
+
+Link for Modal Dialog Box:
+https://sapcodes.com/2015/11/19/modal-dialog-box-pop-up-screen-in-module-pool/
+
+Leave to Screen Understandings.
+https://answers.sap.com/questions/3604385/leave-to-screen-0.html
+
+Module Pool programming Interview Questions:
+https://sinuabaptutor.blogspot.com/2017/05/module-pool-programming-interview-questions-and-answers-in-sap-abap.html
+First = Calling
+Second = Called
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

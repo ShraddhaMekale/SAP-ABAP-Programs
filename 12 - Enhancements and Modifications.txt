@@ -1,0 +1,234 @@
+                                        Enhancements & Modifications
+
+Enhancements - We will enhance the SAP functionality in Customer namespace( Z or Y).
+Modifications - We will enhance the SAP functionality in SAP namespace( Name should not start with Z or Y).
+
+
+
+Types of Enhancements & Modifications 
+
+1) Implicit & Explicit Enhancements -  Enhancement
+2) Customer Exit( Function Module Exit , Menu Exit, Screen Exit) - Enhancement
+3) BADI( Business Addin's) - Enhancements
+4) User Exit - Modification
+
+1) Implicit & Explicit Enhancements
+
+Implict Enhancement - Implicit point is available at the starting or at the last of the program , 
+                      Sub routines, Function modules etc.
+                      We will create the Implicit Implementation using those points.
+
+Explict Enhancement - Explicit point & Section are available at any point. We will create the Explicit implementations using those points and sections.
+
+Enhancement-point -- You can only add additional codes, you cannot change or replace the existing code.
+                     1. It will not give default implementation.
+                     2. Along with standard code your implementation also executed
+                     3. You can only add additional codes, you cannot replace the existing code
+                       
+Enhancment-section -- You can change or replace the existing SAP code.
+                     1. It will give default implementation 
+                     2. Only your implementation will execute 
+                     3. You can change or replace the existing SAP code
+
+Enhancement Spot : Enhancement spots are containers for explicit enhancement options.
+
+Program : LEINBF0M
+
+
+2) Customer Exit - It is also called as Function Exit.
+
+   Ways to Find a Customer Exit -      1) Put the break-point on the statment CALL CUSTOMER-FUNCTION.
+                                       2) Put the package name in SMOD transaction code( Path : Utilities - Find - Package name).
+                                       3) Go to transaction code - SE84( Path : Enhancements - Customer Exits) 
+
+
+  Steps to Implement a Customer Exit -
+
+ 1) Go to transaction code - CMOD
+ 2) Provide a project name and click create.
+ 3) Click on Enhancement assignment tab and provide the customer exit name.
+ 4) Click on Components tab - It will navigate you to function module.
+ 5) Write the logic in the Z include of that function module.
+ 6) Activate the project. 
+
+Tables & Transaction codes :
+
+1) SMOD -> To find customer Exit.
+2) CMOD -> To Implement a customer Exit.
+3) MODSAP -> To find the customer exit name by passing the function module.
+4) MODACT -> To find the project for a customer exit name.
+
+
+Relationship between a project and Customer Exit name -> 1:1
+
+
+Menu Exit -> 
+
+Menu exits add menu items to standard SAP applications.
+These special entries have function codes that begin with "+" (a plus sign) - +CUS
+
+Link for Menu Exit -> https://saptechblogspot.blogspot.com/2016/09/menu-exits.html 
+
+Screen Exit->
+
+The screen type of the screen is Subscreen.
+
+Link for Screen Exit -> http://freesapabap.blogspot.com/2014/11/customer-exit-screen-exit.html
+
+
+
+                                                             User Exit.
+
+User Exit are modifications. They are only available in SAP SD( Sales & distribution) module. 
+They are available in the form of a Sub routines.
+
+Ways to find out a User Exit.
+
+1) Check the documentation of the program.
+2) Search for Key word - PERFORM USEREXIT
+3) Search in  Package : VMOD
+
+The Most Important User Exit's of SAP SD module are available in program : MV45AFZZ.
+
+
+FORM USEREXIT_MOVE_FIELD_To_VBAK.
+
+ENDFORM.
+
+
+
+
+                                                         BADI
+
+1) BADI is an Enhancement.
+2) The full form of BADI is Business ADD In's.
+3) It is based upon OOPS concepts( Interfaces & Classes).
+4) SE18 -> BADI Definition( Interface)
+5) SE19->  BADI Implementation( Classes)
+
+Types of BADI:
+
+1) Classic BADI
+2) New BADI( Kernel BADI)
+
+How to find a classic BADI ->  
+
+1) We can use SAP class - CL_EXITHANDLER. In this class we have the method name - GET_INSTANCE.
+2) Pass the package name in SE18 transaction code
+  ( Path : Click on F4 help of BADI name->New Selection->Pass the package name).
+3) Pass the package name in SE84 transaction code(Enhancements-Business Addin's-Definition). 
+
+How to find a new BADI
+
+1) Put the break-point on Key word - CALL BADI or GET BADI.
+2) Pass the package name in SE18 transaction code
+  ( Path : Click on F4 help of BADI name->New Selection->Pass the package name).
+3) Pass the package name in SE84 transaction code(Enhancements-Business Addin's-Definition).
+
+Multiple Use -> We can create multiple Implementations.
+SAP Internal -> Only for SAP Use.
+
+Difference between classic BADI and New BADI
+
+1) In Classic BADI, there is no Enhancement Spot.In New BADI there is an enhancement spot.
+2) In Classic BADi, the name of the Implementing class automatically appears. 
+   In New BADI we need to provide the implementing class name.
+                     
+Real time Implementation: 
+
+Classical BADi Example : 
+
+Transaction code : MM01
+BADI Definition : BADI_MATERIAL_CHECK
+Interface : IF_EX_BADI_MATERIAL_CHECK
+Method : CHECK_DATA
+
+New BADI Definition Example(MM01) : 
+
+Transaction code : MM02
+Enhancement Spot : EHSPS_SPOT_PS_SPEC
+BADI Definition : BADI_EHSS_AUTH_CHECK
+Interface : IF_EX_BADI_EHSS_AUTH_CHECK
+Method : AT_SAVE_CHECK
+
+          
+Link for BADI : https://www.sapnuts.com/courses/core-abap/badi-sap/real-time-of-using-badi.html
+                http://saptechnical.com/Tutorials/ExitsBADIs/VL02/page1.htm
+
+Link for Userexit, Customer Exit,BADI :
+https://inui.io/sap-user-exit-customer-exit-badi-bapi/#why-user-exits-customer-exits-badis-and-bapis
+
+
+
+
+                                                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         
+
+
+
+

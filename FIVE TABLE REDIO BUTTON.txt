@@ -1,0 +1,102 @@
+*&---------------------------------------------------------------------*
+*& Report ZVEDASHRI
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZVEDASHRI LINE-COUNT 20(2).
+TABLES: ZSHRI_DATA, ZHERO_HONDAID, MARA, KNA1,ANLA.
+  SELECTION-SCREEN BEGIN OF BLOCK BLK1 WITH FRAME TITLE TEXT-002.
+   PARAMETERS:B1 RADIOBUTTON GROUP R1,
+              B2 RADIOBUTTON GROUP R1,
+              B3 RADIOBUTTON GROUP R1,
+              B4 RADIOBUTTON GROUP R1,
+              B5 RADIOBUTTON GROUP R1.
+   SELECTION-SCREEN END OF BLOCK BLK1.
+   DATA: WA TYPE ZSHRI_DATA,
+         WA1 TYPE ZHERO_HONDAID,
+         WA2 TYPE MARA,
+         WA3 TYPE KNA1,
+         WA4 TYPE ANLA,
+         ITAB LIKE TABLE OF ZSHRI_DATA,
+         ITAB1 LIKE TABLE OF ZHERO_HONDAID,
+         ITAB2 LIKE TABLE OF MARA,
+         ITAB3 LIKE TABLE OF KNA1,
+         ITAB4 LIKE TABLE OF ANLA.
+
+     TOP-OF-PAGE.
+     WRITE: SY-PAGNO.
+IF B1 = 'X'.
+  WRITE: 'STUDENT REPORT',
+          SY-DBCNT.
+          ULINE.
+ELSEIF B2 = 'X'.
+  WRITE: 'EMPLOYEE REPORT',
+          SY-DBCNT.
+          ULINE.
+ELSEIF B3 = 'X'.
+  WRITE: 'MATERIAL REPORT',
+          SY-DBCNT.
+          ULINE.
+ELSEIF B4 = 'X'.
+  WRITE: 'CUSTOMER REPORT',
+          SY-DBCNT.
+          ULINE.
+ELSE.
+  WRITE: 'ASSETS REPORT',
+          SY-DBCNT.
+          ULINE.
+ENDIF.
+
+END-OF-PAGE.
+ULINE.
+
+   START-OF-SELECTION.
+   if B1 = 'X'.
+     select * from ZSHRI_DATA into
+       CORRESPONDING FIELDS OF TABLE ITAB.
+   LOOP AT ITAB INTO WA.
+     WRITE: / WA-STUDENTS_APP_ID,
+              WA-STUDENT_NAME,
+              WA-STD_DEPRT,
+              WA-STUDENT_MOBNO,
+              WA-STUDENT_DOB,
+              WA-STUDENT_EID,
+              WA-STUDENT_AGE.
+ENDLOOP.
+ELSEIF B2 = 'X'.
+     select * from ZHERO_HONDAID into
+       CORRESPONDING FIELDS OF TABLE ITAB1.
+   LOOP AT ITAB1 INTO WA1.
+     WRITE: / WA1-EMPLOYEE_ID,
+              WA1-EMPLOYEE_NAME,
+              WA1-DATEOF_JOINING,
+              WA1-EMPLOYEE_ROLE,
+              WA1-EMPLOYEE_PHNO,
+              WA1-EMPLOYEE_SALARY,
+              WA1-COMPANY_NAME.
+     ENDLOOP.
+   ELSEIF B3 = 'X'.
+     select * from MARA into
+       CORRESPONDING FIELDS OF TABLE ITAB2.
+   LOOP AT ITAB2 INTO WA2.
+     WRITE: / WA2-MANDT,
+              WA2-MATNR,
+              WA2-ERSDA.
+     ENDLOOP.
+     elseif B4 = 'X'.
+     select * from KNA1 into
+       CORRESPONDING FIELDS OF TABLE ITAB3.
+   LOOP AT ITAB3 INTO WA3.
+     WRITE: / WA3-MANDT,
+              WA3-KUNNR.
+     ENDLOOP.
+     else.
+     select * from ANLA into
+       CORRESPONDING FIELDS OF TABLE ITAB4.
+   LOOP AT ITAB4 INTO WA4.
+     WRITE: / WA4-MANDT,
+              WA4-BUKRS,
+              WA4-ANLN1.
+     ENDLOOP.
+
+     endif.

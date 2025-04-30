@@ -1,0 +1,43 @@
+                                     SAP Scripts
+1) Scripts are also Layouts in SAP.
+2) The Transaction Code for SAP Script is SE71.
+
+
+                                 Difference between SAP Script and Smartform.
+
+1. Script is client dependent whereas smartform is client independent.
+2) Script does not generate a function module whereas Smartform generates a function module on activation.
+3) Script requires the creation of a page Whereas in Smartform one page is by default present.
+4) It is mandatory to pass one Paragraph format in Script whereas in smartform there is no need of paragraph format.
+5) It is mandatory to pass first page in Script whereas in smartform there is no need to pass first page.
+
+
+                                Calling SAP Script from Driver Program
+
+We can call SAP Script from the driver program with the help of below mentioned function modules. 
+
+OPEN_FORM: This function module opens the SAP script form .
+WRITE_FORM: This function module is used to write the contents in the windows of the SAP Script.
+CLOSE_FORM: This form close the current SAP script form.
+
+
+
+100      200
+Script
+Smartform  Smartform
+
+
+Client Copy( SCC1)
+
+Concept of Next Page
+Current Page and Total Page - &PAGE& , &SAPSCRIPT-FORMPAGES&
+Graphics in SAP Scripts
+Standard Text in SAP Scripts
+SAP Script Translation to other Languages
+
+
+
+
+
+
+

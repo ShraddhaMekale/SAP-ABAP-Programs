@@ -1,0 +1,24 @@
+# PROGRAM FOR SELECT ALL THE RECORDS FROM MARA TABLE BY USING (*)
+
+REPORT ZSQL_2.
+
+DATA : WA TYPE MARA,
+      ITAB LIKE TABLE OF MARA.
+
+START-OF-SELECTION.
+
+SELECT * FROM MARA
+  INTO CORRESPONDING FIELDS OF TABLE ITAB.
+
+  LOOP AT ITAB INTO WA.
+
+    WRITE : / WA-MATNR,
+              WA-MANDT,
+              WA-ERSDA,
+              WA-ERNAM,
+              WA-LAEDA,
+              WA-AENAM,
+              WA-PSTAT,
+              WA-MTART.
+
+    ENDLOOP.

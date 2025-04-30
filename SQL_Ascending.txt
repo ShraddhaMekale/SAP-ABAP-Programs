@@ -1,0 +1,27 @@
+*&---------------------------------------------------------------------*
+*& Report ZSQL_1
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZSQL_1.
+DATA:  WA Type MARA,
+      ITAB TYPE TABLE OF MARA.
+TABLES: MARA.
+ SELECT-OPTIONS S_MATNR for MARA-MATNR.
+START-OF-SELECTION.
+SELECT MATNR ERSDA ERNAM MTART
+  FROM MARA
+  INTO CORRESPONDING FIELDS OF TABLE ITAB
+  WHERE matnr in  s_MATNR
+  ORDER BY MATNR ASCENDING.
+  IF sy-subrc = 0.
+      MESSAGE: 'Sucessfully Fetched The Record' TYPE 'S'.
+      LOOP at ITAB into WA.
+        WRITE: / WA-MATNR,
+                 WA-ERSDA,
+                 WA-ERNAM,
+                 WA-MTART.
+        ENDLOOP.
+    ELSE.
+      MESSAGE: 'No Record found' TYPE 'E'.
+    ENDIF.

@@ -1,0 +1,45 @@
+ALV REPORT PROGRAM
+
+
+
+REPORT ZALV_SM.
+
+TABLES : MARA.
+DATA : I_MARA TYPE TABLE OF MARA.
+DATA : WA_MARA TYPE MARA.
+SELECT-OPTIONS SO_MATNR FOR MARA-MATNR.
+PARAMETERS P_MTART TYPE MARA-MTART.
+
+START-OF-SELECTION.
+PERFORM GET_DATA.
+PERFORM DISPLAY_DATA.
+*&---------------------------------------------------------------------*
+*&      Form  GET_DATA
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM GET_DATA .
+  SELECT * FROM MARA INTO TABLE I_MARA WHERE MATNR IN SO_MATNR AND MTART = P_MTART.
+
+
+ENDFORM.                    " GET_DATA
+*&---------------------------------------------------------------------*
+*&      Form  DISPLAY_DATA
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM DISPLAY_DATA .
+  CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+  EXPORTING
+    I_CALLBACK_PROGRAM            = 'SY-REPID'
+    I_STRUCTURE_NAME              = 'MARA'
+  TABLES
+    T_OUTTAB                      = I_MARA.
+
+ENDFORM.                    " DISPLAY_DATA

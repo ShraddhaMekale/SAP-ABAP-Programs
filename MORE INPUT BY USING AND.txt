@@ -1,0 +1,33 @@
+*&---------------------------------------------------------------------*
+*& Report Z_SM2
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT Z_SM2.
+*
+TABLES: MARA.
+
+SELECT-OPTIONS: S_MATNR FOR MARA-MATNR ,
+                S_ERSDA FOR MARA-ERSDA,
+                S_ERNAM FOR MARA-ERNAM,
+                S_MTART FOR MARA-MTART.
+DATA: WA TYPE MARA,
+      ITAB TYPE TABLE OF MARA.
+START-OF-SELECTION.
+SELECT MATNR ERSDA ERNAM MTART
+  FROM MARA
+  INTO CORRESPONDING FIELDS OF TABLE ITAB
+ WHERE MATNR IN S_MATNR
+  AND ERSDA IN S_ERSDA
+  AND ERNAM IN S_ERNAM
+  AND MTART IN S_MTART
+  ORDER BY MATNR ASCENDING.
+  IF SY-SUBRC = 0.
+  WRITE: / SY-DBCNT.
+  LOOP AT ITAB INTO WA.
+  WRITE: / WA-MATNR,
+           WA-ERSDA,
+           WA-ERNAM,
+           WA-MTART.
+ENDLOOP.
+   ENDIF.

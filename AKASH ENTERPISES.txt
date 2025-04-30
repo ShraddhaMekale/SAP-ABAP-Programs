@@ -1,0 +1,36 @@
+*&---------------------------------------------------------------------*
+*& Report Z_AKAASH_EMKE
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT Z_AKAASH_EMKE.
+
+parameter: com1 type i OBLIGATORY,
+           com2 like com1 OBLIGATORY,
+           com3 like com2 OBLIGATORY,
+           COM4 LIKE COM3 OBLIGATORY,
+           TAX TYPE I OBLIGATORY.
+
+DATA: BIL TYPE P,
+      CGST TYPE P,
+      SGST TYPE P,
+      GST TYPE P,
+      A TYPE I,
+      TOT TYPE P.
+
+TOT = COM1 + COM2 + COM3 + COM4.
+
+A = TAX / 2.
+
+CGST = ( TOT * A ) / 100.
+
+SGST = CGST.
+
+GST = CGST + SGST.
+
+BIL = TOT + GST.
+
+WRITE : 'CGST IS', CGST,
+       /'SGST IS', SGST.
+
+WRITE:/' TOTAL BILL IS WITH GST ', BIL.

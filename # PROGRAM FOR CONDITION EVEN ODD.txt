@@ -1,0 +1,13 @@
+# PROGRAM FOR CONDITION EVEN ODD
+
+REPORT Z_CONDITION_EVENODD.
+
+PARAMETERS : a TYPE i OBLIGATORY.
+
+IF a mod 2 = 0 .
+  WRITE : 'the number is even'.
+  ELSE
+  WRITE : 'the number is odd'.
+
+
+ENDIF.
