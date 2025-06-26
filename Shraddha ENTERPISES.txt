@@ -3,7 +3,7 @@
 *&---------------------------------------------------------------------*
 *&
 *&---------------------------------------------------------------------*
-REPORT Z_AKAASH_EMKE.
+REPORT Z_Shraddha.
 
 parameter: com1 type i OBLIGATORY,
            com2 like com1 OBLIGATORY,
