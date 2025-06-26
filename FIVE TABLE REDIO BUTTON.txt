@@ -1,9 +1,9 @@
 *&---------------------------------------------------------------------*
-*& Report ZVEDASHRI
+*& Report Z_Shraddha
 *&---------------------------------------------------------------------*
 *&
 *&---------------------------------------------------------------------*
-REPORT ZVEDASHRI LINE-COUNT 20(2).
+REPORT Z_Shraddha LINE-COUNT 20(2).
 TABLES: ZSHRI_DATA, ZHERO_HONDAID, MARA, KNA1,ANLA.
   SELECTION-SCREEN BEGIN OF BLOCK BLK1 WITH FRAME TITLE TEXT-002.
    PARAMETERS:B1 RADIOBUTTON GROUP R1,
