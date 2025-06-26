@@ -1,9 +1,9 @@
 *&---------------------------------------------------------------------*
-*& Report ZVEDASHRI1
+*& Report ZShraddha
 *&---------------------------------------------------------------------*
 *&
 *&---------------------------------------------------------------------*
-REPORT ZVEDASHRI1 LINE-COUNT 20.
+REPORT ZShraddha LINE-COUNT 20.
 
 SELECTION-SCREEN BEGIN OF BLOCK BLK1 WITH FRAME TITLE text-001.
 
